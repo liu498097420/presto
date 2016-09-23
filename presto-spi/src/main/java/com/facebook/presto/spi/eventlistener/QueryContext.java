@@ -47,8 +47,8 @@ public class QueryContext
             Optional<String> catalog,
             Optional<String> schema,
             Map<String, String> sessionProperties,
-            String serverAddress,
             String serverVersion,
+            String serverAddress,
             String environment)
     {
         this.user = requireNonNull(user, "user is null");
