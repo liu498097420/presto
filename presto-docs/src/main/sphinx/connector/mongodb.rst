@@ -179,6 +179,7 @@ A schema collection consists of a MongoDB document for a table.
         "table": ...,
         "fields": [
               { "name" : ...,
+                "alias" : ...,
                 "type" : "varchar|bigint|boolean|double|date|array<bigint>|...",
                 "hidden" : false },
                 ...
@@ -189,7 +190,7 @@ A schema collection consists of a MongoDB document for a table.
 =============== ========= ============== =============================
 Field           Required  Type           Description
 =============== ========= ============== =============================
-``table``       required  string         Presto table name
+``table``       required  string         Mongodb collection name. Case sensitive
 ``fields``      required  array          A list of field definitions. Each field definition creates a new column in the Presto table.
 =============== ========= ============== =============================
 
@@ -199,6 +200,7 @@ Each field definition:
 
     {
         "name": ...,
+        "alias": ...,
         "type": ...,
         "hidden": ...
     }
@@ -206,12 +208,13 @@ Each field definition:
 =============== ========= ========= =============================
 Field           Required  Type      Description
 =============== ========= ========= =============================
-``name``        required  string    Name of the column in the Presto table.
+``name``        required  string    Name of the field in the MongoDB collection. Case sensitive
+``alias``       optional  string    Name of the column in Presto table. Expects a lower-case name
 ``type``        required  string    Presto type of the column.
 ``hidden``      optional  boolean   Hides the column from ``DESCRIBE <table name>`` and ``SELECT *``. Defaults to ``false``.
 =============== ========= ========= =============================
 
-There is no limit on field descriptions for either key or message.
+There is no limit on field descriptions for either key or message. ``alias`` is set as lower-case of ``name`` field by default.
 
 ObjectId
 --------
